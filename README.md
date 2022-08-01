@@ -45,6 +45,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Nest CLI helper commands
+
+```bash
+# generate module
+$ nest g module <module-name>
+# generate controller
+$ nest g controller <controller-name> --no-spec
+# generate service
+$ nest g service <service-name> --no-spec
+```
+
 ## Test
 
 ```bash
