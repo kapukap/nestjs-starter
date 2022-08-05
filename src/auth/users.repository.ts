@@ -10,9 +10,9 @@ import { ErrorCodes } from '../Utils/Errors/errors-constaints.enum';
 export class UsersRepository extends Repository<User> {
     constructor(
         @InjectRepository(User)
-        private userRepository: Repository<User>,
+        private usersRepository: Repository<User>,
     ) {
-        super(userRepository.target, userRepository.manager);
+        super(usersRepository.target, usersRepository.manager);
     }
 
     async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
