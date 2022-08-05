@@ -15,19 +15,7 @@ export class TasksService {
     ) {}
 
     async getTasks(getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
-        const {status, search} = getTasksFilterDto
-
-        let tasks = await this.tasksRepository.find({})
-
-        if (status) {
-            tasks = tasks.filter(task => task.status === status)
-        }
-
-        if (search) {
-            tasks = tasks.filter(task => task.title.includes(search) || task.description.includes(search))
-        }
-
-        return tasks
+        return this.tasksRepository.getTasks(getTasksFilterDto)
     }
 
     async getTaskById(id: string): Promise<Task> {
@@ -52,7 +40,7 @@ export class TasksService {
         return task
     }
 
-    async createTask(createTaskDto: CreateTaskDto): Promise <any> {
+    async createTask(createTaskDto: CreateTaskDto): Promise <Task> {
         return this.tasksRepository.createTask(createTaskDto)
     }
 }
