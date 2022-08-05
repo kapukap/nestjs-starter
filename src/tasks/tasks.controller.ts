@@ -5,6 +5,8 @@ import {GetTasksFilterDto} from "./dto/get-tasks-filter.dto";
 import {UpdateTaskStatusDto} from "./dto/update-task-status.dto";
 import { Task } from './task.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from '../auth/user.entity';
+import { GetUserDecorator } from '../auth/decorators/get-user.decorator';
 
 // Only Endpoints, Communicating with services and return res
 @Controller('tasks')
@@ -38,7 +40,10 @@ export class TasksController {
 
     @Post()
     //createTask(@Body() body)
-    createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
-        return this.taskService.createTask(createTaskDto)
+    createTask(
+        @Body() createTaskDto: CreateTaskDto,
+        @GetUserDecorator() user: User
+    ): Promise<Task> {
+        return this.taskService.createTask(createTaskDto, user)
     }
 }
