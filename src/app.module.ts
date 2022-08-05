@@ -2,6 +2,7 @@ import {Module} from '@nestjs/common';
 import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { config } from "dotenv";
+import { AuthModule } from './auth/auth.module';
 
 // Properties
 // - providers: array of providers to be available within the module via dependency injection
@@ -26,7 +27,8 @@ const DATABASE_CONFIG: TypeOrmModuleOptions = {
 @Module({
     imports: [
         TasksModule,
-        TypeOrmModule.forRoot(DATABASE_CONFIG)
+        TypeOrmModule.forRoot(DATABASE_CONFIG),
+        AuthModule
     ]
 })
 export class AppModule {}
