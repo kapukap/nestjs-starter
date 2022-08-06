@@ -26,7 +26,7 @@ export class TasksRepository extends Repository<Task> {
 
         if (search) {
             query.andWhere(
-                'LOWER(task.title) LIKE LOWER(:search) OR LOWER(task.description) LIKE LOWER(:search)',
+                '(LOWER(task.title) LIKE LOWER(:search) OR LOWER(task.description) LIKE LOWER(:search))',
                 { search: `%${search}%` }); // for looking combinations in diff part of words
         }
         return await query.getMany();
