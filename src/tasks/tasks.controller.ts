@@ -23,22 +23,29 @@ export class TasksController {
     }
 
     @Get('/:id')
-    getTaskById(@Param('id') id: string): Promise<Task> {
-        return this.taskService.getTaskById(id)
+    getTaskById(
+        @Param('id') id: string,
+        @GetUserDecorator() user: User
+    ): Promise<Task> {
+        return this.taskService.getTaskById(id, user)
     }
 
     @Delete('/:id')
-    deleteTask(@Param('id') id: string): Promise<void> {
-        return this.taskService.deleteTask(id)
+    deleteTask(
+        @Param('id') id: string,
+        @GetUserDecorator() user: User
+    ): Promise<void> {
+        return this.taskService.deleteTask(id, user)
     }
 
     @Patch('/:id/status')
     updateTaskStatus(
         @Param('id') id: string,
-        @Body() updateTaskStatusDto: UpdateTaskStatusDto
+        @Body() updateTaskStatusDto: UpdateTaskStatusDto,
+        @GetUserDecorator() user: User
     ): Promise<Task> {
         const {status} = updateTaskStatusDto
-        return this.taskService.updateTaskStatus(id, status)
+        return this.taskService.updateTaskStatus(id, status, user)
     }
 
     @Post()
